@@ -1,9 +1,5 @@
 # Задайте натуральное число N. Напишите программу, которая составит список простых множителей числа N.
 
-# in_list = tuple([x for x in range(2,10)])
-# print(in_list)
-
-
 def search_multis(x: int, dict: tuple):
     i = 0
     item = dict[i]
