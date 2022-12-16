@@ -7,7 +7,7 @@
 import random
 
 def rand():
-    return random.randint(0, 10)
+    return random.randint(0, 100)
 
 def model(k: int, rand: int):
     if rand == 0:
