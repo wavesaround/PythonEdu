@@ -29,33 +29,39 @@ def lot() -> int:                                                            # r
         return 2
 
 def verify(input_num: int, person: int):
+    global max_candies
     if input_num.isdigit() == False:                                         # int verification
         return int(input(f'Игрок {person}, введите целое число --> '))           
-    if int(input_num) > 28 or int(input_num) < 0:                            # range from to verif.
+    if int(input_num) > max_candies or int(input_num) < 0:                            # range from to verif.
         return int(input(f'Игрок {person}, введите число от 0 до 28 --> '))
     else:                                                                    # return true
         return int(input_num)
         
 def set_input(switch: int) -> str:                                           # player choice
-    global x
+    global lottery
     if switch == 1:
-        x = 2
+        lottery = 2
         return verify((input('Игрок 1 --> ')), switch)
     else:
-        x = 1
+        lottery = 1
         return verify((input('Игрок 2 --> ')), switch)
 
-# start game
 
-candy_count = 100
-x = lot()
-temp = 0
 
-opening()
+####### start game #######
+
+candy_count = 100           # total candies
+lottery = lot()             # lottery = start random
+temp = 0                    # number of winner
+max_candies = 28            # max number of candies
+
+opening()                   # start message and Y/N input
 
 while not candy_count < 0:
-    temp = x
-    candy_count -= set_input(x)
+    temp = lottery
+    candy_count -= set_input(lottery)
 print()    
 print(f'Игрок {temp} забирает все конфеты')
 print()
+
+###########################
