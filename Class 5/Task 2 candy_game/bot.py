@@ -1,7 +1,7 @@
 import os
 import sys
 import random
-
+import bot_brain
 
 def opening():
     os.system('clear')
@@ -28,9 +28,9 @@ def lot() -> int:                                                            # r
 def verify(input_num: int, person: int):
     global max_candies
     if input_num.isdigit() == False:                                         # int verification
-        return int(input(f'Игрок {person}, введите целое число --> '))
+        return int(input(f'Игрок, введите целое число --> '))
     if int(input_num) > max_candies or int(input_num) < 0:                   # check max candies
-        return int(input(f'Игрок {person}, введите число от 0 до 28 --> '))
+        return int(input(f'Игрок, введите число от 0 до 28 --> '))
     else:                                                                    # return true
         return int(input_num)
 
@@ -43,30 +43,28 @@ def win(temp: int):
 
 
 def set_input(switch: int) -> str:                                           # player choice
-    global lottery
-    global max_candies
-    global candy_count
+    global lottery, memory_bot, max_candies
     if switch == 1:
         lottery = 2
         return verify((input('Человек --> ')), switch)
     else:
         lottery = 1
-        t = random.randint(1, 28)
+        t = bot_brain.go(memory_bot, max_candies)
         print(f'    Бот --> {t}')
         return t
 
-####### start p2p game #######
+####### start bot game #######
 
 
 def start():
-    global candy_count
-    global lottery
-    global temp
-    global max_candies
+    global candy_count, lottery, temp, max_candies, memory_bot
     opening()                        # <-- start message
     while not candy_count < 0:
         temp = lottery
-        candy_count -= set_input(lottery)
+        result = set_input(lottery)
+        candy_count -= result
+        if lottery == 2:
+            memory_bot = result
     print()
     print(win(temp))
     print()
@@ -74,7 +72,7 @@ def start():
 ######## settings ########
 
 
-candy_count = 2021           # total candies
+candy_count = 400           # total candies
 lottery = lot()             # lottery = start random
 temp = 0                    # number of winner
 max_candies = 28            # max number of candies
