@@ -72,7 +72,7 @@ def start():
 ######## settings ########
 
 
-candy_count = 400           # total candies
+candy_count = 2021          # total candies
 lottery = lot()             # lottery = start random
 temp = 0                    # number of winner
 max_candies = 28            # max number of candies
