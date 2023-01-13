@@ -38,3 +38,15 @@ def edit_card(str_target: str, str_new: str):
             else:
                 db_write.write(line)
     alert_return(True)
+
+
+def delete_card(str_target: str):
+    with open(db_path, 'r') as db_read:
+        lines = db_read.readlines()
+    with open(db_path, 'w') as db_write:
+        for line in lines:
+            if line == str_target:
+                pass
+            else:
+                db_write.write(line)
+    alert_return(True)

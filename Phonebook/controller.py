@@ -30,6 +30,17 @@ def edit_contact():
     database.edit_card(get_rows[edit_id - 1], new_line)
 
 
+def delete_contact():
+    del_id = 1
+    input_data = view.type_data('Введите имя или фамилию: ')
+    get_rows = database.search_data(input_data)
+    view.print_search(get_rows)
+    if len(get_rows) > 1: 
+        del_id = int(view.type_data('Введите номер контакта для редактирования '))
+        view.print_card(get_rows[del_id - 1])
+    view.sure('delete')
+    database.delete_card(get_rows[del_id - 1])
+
 def start():
     view.launch()
     go_button = view.type_data('')
@@ -42,6 +53,8 @@ def start():
             search()
         case '4':
             edit_contact()
+        case '5':
+            delete_contact()
         case _:
             print('Попробуйте еще')
             start() 
